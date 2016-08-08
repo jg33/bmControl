@@ -58,11 +58,10 @@ BMD_SDICameraControl_I2C  sdiCam(shieldAddress);
 
 
 // Camera State //
-float currentAperture;
-float currentFocus;
-float currentExposure;
-int currentGain;
-
+float cam1_currentAperture;
+float cam1_currentFocus;
+float cam1_currentExposure;
+int cam1_currentGain;
 
 //debug stuff
 int debugApt = 0; //testing aperture
@@ -84,17 +83,69 @@ void setup() {
   sdiCam.setOverride(true);
   Serial.println("SDI Enabled.");
 
-  // Top-Level Callbacks //
-//  oscServer.addCallback("/ping", &pingPong);
-//  oscServer.addCallback("/setReplyPort", &setReplyPort);
-//
-//  oscServer.addCallback("/bmc/^", &parseBmcMsg);
-//  oscServer.addCallback("/bmcRaw/void", &rawVoid);
-//  oscServer.addCallback("/bmcRaw/fixed16", &rawFixed16);
-//  Serial.println("OSC Set up.");
+
+}
+
+// --- OSC Messages --- //
+void parseBmcMsg(OSCMessage &_msg, int offset) {
+  
+  int camera = 0; //get address 0
+  //  String addr = _msg.getOSCAddress(); //get command
+
+
+  if (_msg.fullMatch("/bmc/1/aperture",0)) {
+    setAperture(1, _msg.getInt(0));
+  } else if (_msg.fullMatch("/bmc/1/focus",0)) {
+    setFocus(1, _msg.getFloat(0));
+  } else if (_msg.fullMatch("/bmc/1/exposure",0)) {
+    setExposure(1, _msg.getInt(0));
+  }else {
+
+    Serial.println("[ERR] command not regognized...");
+    char buff[16];
+    _msg.getAddress(buff,0); 
+    Serial.println(buff);
+
+  }
+
+  blink();
+
+}
+
+void pingPong(OSCMessage &_msg, int val) {
+  blink();
+
+  Serial.println("pinged.");
+  OSCMessage reply("/pong");
+  reply.add((int32_t)1);
+  Udp.beginPacket(debugIp,replyPort);
+  reply.send(Udp);
+  Udp.endPacket();
+  reply.empty();
 
 
 }
+
+void setReplyPort(OSCMessage &_msg) {
+  //replyPort = _msg.getArgInt32(0);
+}
+
+void getStatus(OSCMessage &_msg, int camNum = 1){
+  
+  if(true){
+    OSCMessage reply("/status");
+    reply.add((int32_t)1);
+    reply.add("/status/1/exposure").add((int32_t)cam1_currentExposure);
+    Udp.beginPacket(debugIp,replyPort);
+    reply.send(Udp);
+    Udp.endPacket();
+    reply.empty();
+  
+  }
+  
+}
+
+// ---- LOOP ---- //
 
 void loop() {
  
@@ -115,11 +166,9 @@ void loop() {
            Serial.println("no err");
              if(bndl.size() > 0) {
                 static int32_t sequencenumber=0;
-                bndl.route("/ping", pingPong);
-                Udp.beginPacket(Udp.remoteIP(), replyPort);
-                bndl.send(Udp);
-                Udp.endPacket();     
-
+                bndl.route("/ping", pingPong);    
+                bndl.route("/bmc", parseBmcMsg);    
+                bndl.route("/getStatus", getStatus);
              }
         } else{
          Serial.println("err."); 
@@ -128,89 +177,47 @@ void loop() {
   // --- //
   
   
-  
-  Serial.print("Set Aperture to: ");
-  Serial.println(debugApt);
-  setAperture(0,debugApt);
-  debugApt++;
-  debugApt = debugApt % 16;
-  
-//  Udp.beginPacket(debugIp, outPort);
-//  toSend.beginMessage("/hi");
-//  toSend.addArgInt32(123);
-//  oscClient.send(&toSend);
-//  Serial.println("sent");
-//  toSend.flush();
-//  Serial.println("fushed");
-
-  delay(1000);
-  Serial.println("delayed");
-      
+    //  DEBUGGINs //
+//  Serial.print("Set Aperture to: ");
+//  Serial.println(debugApt);
+//  setAperture(0,debugApt);
+//  debugApt++;
+//  debugApt = debugApt % 16;
+//
+//  delay(1000);
+//  Serial.println("delayed");
 
 }
 
-void parseBmcMsg( OSCMessage &_msg) {
-  
-  int camera = 0; //get address 0
-//  String addr = _msg.getOSCAddress(); //get command
-
-
-  if (true) {
-
-  } else {
-
-    Serial.println("[ERR] command not regognized...");
-  }
-
-  blink();
-
-}
-
-// ---- Misc ---- //
-void pingPong(OSCMessage &_msg, int val) {
-  blink();
-
-  Serial.println("pinged.");
-//  toSend.setAddress(debugIp,replyPort);
-//  toSend.beginMessage("/pong");
-//  toSend.addArgString("ok!");
-//  oscClient.send(&toSend);
-//  toSend.flush();
-
-}
-
-void setReplyPort(OSCMessage &_msg) {
-  //replyPort = _msg.getArgInt32(0);
-}
 
 
 // ---- Camera Commands ---- //
 
 void setAperture(int _camera, float _value) {
   // FORMAT: Float (-1 - 16.0)
-  currentAperture = _value;
-  sdiCam.writeCommandFixed16(_camera, 0, 2, 0, currentAperture );
+  cam1_currentAperture = _value;
+  sdiCam.writeCommandFixed16(_camera, 0, 2, 0, cam1_currentAperture );
 
 }
 
 void setFocus(int _camera, float _value) {
   // FORMAT: Float (0.0=near, 1.0=far)
-  currentFocus = _value;
-  sdiCam.writeCommandFixed16(_camera, 0, 0, 0, currentFocus ); //
+  cam1_currentFocus = _value;
+  sdiCam.writeCommandFixed16(_camera, 0, 0, 0, cam1_currentFocus ); //
 
 }
 
 void setExposure(int _camera, int _value) {
   // FORMAT: Int32 (time in "us" (sp?))
-  currentExposure = _value;
-  sdiCam.writeCommandFixed16(_camera, 0, 0, 0, currentExposure); //
+  cam1_currentExposure = _value;
+  sdiCam.writeCommandFixed16(_camera, 0, 0, 0, cam1_currentExposure); //
 
 }
 
 void setGain(int _camera, int _value) {
-  // FORMAT: Int32 (time in "us" (sp?))
-  currentGain = _value;
-  sdiCam.writeCommandFixed16(_camera, 0, 0, 0, currentGain); //
+  // FORMAT: 
+  cam1_currentGain = _value;
+  sdiCam.writeCommandFixed16(_camera, 0, 0, 0, cam1_currentGain); //
 
 }
 
