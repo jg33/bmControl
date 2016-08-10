@@ -5,7 +5,7 @@
  This program allows for easy OSC and Serial control of Black Magic Cameras over SDI.
 
  	Board Used:
-   	* Arduino Ethernet
+   	* Arduino Ethernet Rev 3
 
 	Shields used:
  	* Black Magic Arduino SDI Shield
@@ -16,6 +16,8 @@
 
  OSC Message Formatting:
  /bmc/[camera number]/[command] [value(s)]
+ 
+ Licensed under GPL.
 
 */
 
@@ -60,8 +62,6 @@ struct Camera{
   float lift[4];
   float gamma[4];
   float gain[4];
-  
-  
 };
 Camera cameras[NUM_CAMERAS+1];
 
@@ -106,11 +106,32 @@ void parseBmcMsg(OSCMessage &_msg, int offset) {
     setFocus(cam, _msg.getFloat(0));
   } else if (cmd == "exposure") {
     setExposure(cam, _msg.getInt(0));
-  } else if (cmd == "gain") {
-    setGain(cam, _msg.getInt(0));
+  } else if (cmd == "sensorGain") {
+    setSensorGain(cam, _msg.getInt(0));
   } else if (cmd == "whiteBalance") {
     setWhiteBalance(cam, _msg.getInt(0));
-  } else {
+  } else if (cmd == "lift") {
+    float input[4];
+    input[0] = _msg.getFloat(0);
+    input[1] = _msg.getFloat(1);
+    input[2] = _msg.getFloat(2);
+    input[3] = _msg.getFloat(3);
+    setLift(cam, input);
+  } else if (cmd == "gamma") {
+    float input[4];
+    input[0] = _msg.getFloat(0);
+    input[1] = _msg.getFloat(1);
+    input[2] = _msg.getFloat(2);
+    input[3] = _msg.getFloat(3);
+    setGamma(cam, input);
+  }else if (cmd == "gain") {
+    float input[4];
+    input[0] = _msg.getFloat(0);
+    input[1] = _msg.getFloat(1);
+    input[2] = _msg.getFloat(2);
+    input[3] = _msg.getFloat(3);
+    setGain(cam, input);
+  }else {
 
     Serial.println("[ERR] command not regognized...");
     char buff[16];
@@ -190,6 +211,8 @@ void loop() {
                 bndl.route("/bmcRawVoid", writeRawVoid );    
                 bndl.route("/getStatus", getStatus);
                 bndl.route("/setReplyPort", setReplyPort);
+                bndl.route("/setReplyIp", setReplyIp);
+
 
              }
         } else{
@@ -237,7 +260,7 @@ void setExposure(int _camera, int _value) {
 
 }
 
-void setGain(int _camera, int _value) {
+void setSensorGain(int _camera, int _value) {
   // FORMAT: Int8 (1x, 2x, 4x, 8x, 16x gain)
   cameras[_camera].sensorGain = _value;
   sdiCam.writeCommandInt8(_camera, 1, 1, 0, cameras[_camera].sensorGain); //
@@ -270,6 +293,17 @@ void setGamma(int _camera, float _rgbl[4]){
   cameras[_camera].gamma[3] = _rgbl[3];
 
   sdiCam.writeCommandFixed16(_camera, 8, 1, 0, cameras[_camera].gamma ); //
+
+}
+
+void setGain(int _camera, float _rgbl[4]){
+  // FORMAT: float [4] RGBL, -4.0 - 4.0
+  cameras[_camera].gain[0] = _rgbl[0];
+  cameras[_camera].gain[1] = _rgbl[1];
+  cameras[_camera].gain[2] = _rgbl[2];
+  cameras[_camera].gain[3] = _rgbl[3];
+
+  sdiCam.writeCommandFixed16(_camera, 8, 1, 0, cameras[_camera].gain ); //
 
 }
 
