@@ -38,12 +38,38 @@
 		"subpatcher_template" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-104",
+					"linecount" : 2,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 18.0, 17.0, 207.0, 30.0 ],
+					"style" : "",
+					"text" : "OSC Blackmagic Remote\nCopyright (c) 2016 Jesse Garrison"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-102",
+					"linecount" : 13,
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 17.0, 715.0, 426.0, 162.0 ],
+					"style" : "",
+					"text" : "Licensed under GPL 3.\nThis program is free software: you can redistribute it and/or modify\nit under the terms of the GNU General Public License as published by\nthe Free Software Foundation, either version 3 of the License, or\n(at your option) any later version.\n\nThis program is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of\nMERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\nGNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License\nalong with this program.  If not, see <http://www.gnu.org/licenses/>."
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-100",
 					"maxclass" : "button",
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 269.0, 376.0, 73.0, 73.0 ],
+					"patching_rect" : [ 194.0, 428.0, 73.0, 73.0 ],
 					"presentation_rect" : [ 332.0, 377.0, 0.0, 0.0 ],
 					"style" : ""
 				}
@@ -56,7 +82,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 601.0, 374.0, 150.0, 42.0 ],
+					"patching_rect" : [ 526.0, 426.0, 150.0, 42.0 ],
 					"style" : "",
 					"text" : "PRESETS\n\n1- Bed"
 				}
@@ -69,7 +95,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "preset", "int", "preset", "int" ],
-					"patching_rect" : [ 403.0, 374.0, 100.0, 40.0 ],
+					"patching_rect" : [ 328.0, 426.0, 100.0, 40.0 ],
 					"pattrstorage" : "copresenceScenes",
 					"style" : ""
 				}
@@ -82,7 +108,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "", "", "", "" ],
-					"patching_rect" : [ 403.0, 493.0, 58.0, 20.0 ],
+					"patching_rect" : [ 328.0, 545.0, 58.0, 20.0 ],
 					"restore" : 					{
 						"1_aperture" : [ 2.2 ],
 						"1_focus" : [ 0.789703 ],
@@ -131,7 +157,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 403.0, 429.0, 141.0, 20.0 ],
+					"patching_rect" : [ 328.0, 481.0, 141.0, 20.0 ],
 					"style" : "",
 					"text" : "write copresenceScenes"
 				}
@@ -145,7 +171,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 403.0, 465.0, 180.0, 20.0 ],
+					"patching_rect" : [ 328.0, 517.0, 180.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"client_rect" : [ 100, 100, 500, 600 ],
 						"parameter_enable" : 0,
@@ -165,7 +191,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 811.0, 374.0, 150.0, 42.0 ],
+					"patching_rect" : [ 736.0, 426.0, 150.0, 42.0 ],
 					"style" : "",
 					"text" : "Focus\n\nnicole table 0.79"
 				}
@@ -180,7 +206,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 1528.0, 163.0, 50.0, 20.0 ],
+					"patching_rect" : [ 1453.0, 212.0, 50.0, 20.0 ],
 					"presentation_rect" : [ 1528.0, 166.0, 0.0, 0.0 ],
 					"style" : "",
 					"varname" : "2_gain_l"
@@ -196,7 +222,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 1463.0, 163.0, 50.0, 20.0 ],
+					"patching_rect" : [ 1388.0, 212.0, 50.0, 20.0 ],
 					"presentation_rect" : [ 1463.0, 166.0, 0.0, 0.0 ],
 					"style" : "",
 					"varname" : "2_gain_b"
@@ -212,7 +238,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 988.0, 161.0, 50.0, 20.0 ],
+					"patching_rect" : [ 913.0, 212.0, 50.0, 20.0 ],
 					"presentation_rect" : [ 986.0, 161.0, 0.0, 0.0 ],
 					"style" : "",
 					"varname" : "2_lift_l"
@@ -228,7 +254,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 923.0, 161.0, 50.0, 20.0 ],
+					"patching_rect" : [ 848.0, 212.0, 50.0, 20.0 ],
 					"presentation_rect" : [ 921.0, 161.0, 0.0, 0.0 ],
 					"style" : "",
 					"varname" : "2_lift_b"
@@ -242,7 +268,7 @@
 					"numinlets" : 4,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 796.0, 214.0, 57.0, 20.0 ],
+					"patching_rect" : [ 721.0, 266.0, 57.0, 20.0 ],
 					"presentation_rect" : [ 794.0, 214.0, 0.0, 0.0 ],
 					"style" : "",
 					"text" : "pak f f f f"
@@ -258,7 +284,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 861.0, 161.0, 50.0, 20.0 ],
+					"patching_rect" : [ 786.0, 212.0, 50.0, 20.0 ],
 					"presentation_rect" : [ 859.0, 161.0, 0.0, 0.0 ],
 					"style" : "",
 					"varname" : "2_lift_g"
@@ -274,7 +300,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 796.0, 161.0, 50.0, 20.0 ],
+					"patching_rect" : [ 721.0, 212.0, 50.0, 20.0 ],
 					"presentation_rect" : [ 794.0, 161.0, 0.0, 0.0 ],
 					"style" : "",
 					"varname" : "2_lift_r"
@@ -292,7 +318,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 796.0, 245.0, 140.0, 30.0 ],
+					"patching_rect" : [ 721.0, 297.0, 140.0, 30.0 ],
 					"presentation_rect" : [ 794.0, 245.0, 0.0, 0.0 ],
 					"text" : "/bmc/2/lift \"$1\" \"$2\" \"$3\" \"$4\" ",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
@@ -306,7 +332,7 @@
 					"numinlets" : 4,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1329.0, 216.0, 57.0, 20.0 ],
+					"patching_rect" : [ 1254.0, 268.0, 57.0, 20.0 ],
 					"presentation_rect" : [ 1327.0, 216.0, 0.0, 0.0 ],
 					"style" : "",
 					"text" : "pak f f f f"
@@ -322,7 +348,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 1394.0, 163.0, 50.0, 20.0 ],
+					"patching_rect" : [ 1319.0, 212.0, 50.0, 20.0 ],
 					"presentation_rect" : [ 1392.0, 163.0, 0.0, 0.0 ],
 					"style" : "",
 					"varname" : "2_gain_g"
@@ -338,7 +364,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 1329.0, 163.0, 50.0, 20.0 ],
+					"patching_rect" : [ 1254.0, 212.0, 50.0, 20.0 ],
 					"presentation_rect" : [ 1327.0, 163.0, 0.0, 0.0 ],
 					"style" : "",
 					"varname" : "2_gain_r"
@@ -356,7 +382,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1329.0, 247.0, 151.0, 30.0 ],
+					"patching_rect" : [ 1254.0, 299.0, 151.0, 30.0 ],
 					"presentation_rect" : [ 1327.0, 247.0, 0.0, 0.0 ],
 					"text" : "/bmc/2/gain \"$1\" \"$2\" \"$3\" \"$4\" ",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
@@ -372,7 +398,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 1251.0, 160.0, 50.0, 20.0 ],
+					"patching_rect" : [ 1176.0, 212.0, 50.0, 20.0 ],
 					"presentation_rect" : [ 1249.0, 160.0, 0.0, 0.0 ],
 					"style" : "",
 					"varname" : "2_gamma_l"
@@ -388,7 +414,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 1186.0, 160.0, 50.0, 20.0 ],
+					"patching_rect" : [ 1111.0, 212.0, 50.0, 20.0 ],
 					"presentation_rect" : [ 1184.0, 160.0, 0.0, 0.0 ],
 					"style" : "",
 					"varname" : "2_gamma_b"
@@ -402,7 +428,7 @@
 					"numinlets" : 4,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1059.0, 213.0, 57.0, 20.0 ],
+					"patching_rect" : [ 984.0, 265.0, 57.0, 20.0 ],
 					"presentation_rect" : [ 1057.0, 213.0, 0.0, 0.0 ],
 					"style" : "",
 					"text" : "pak f f f f"
@@ -418,7 +444,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 1124.0, 160.0, 50.0, 20.0 ],
+					"patching_rect" : [ 1049.0, 212.0, 50.0, 20.0 ],
 					"presentation_rect" : [ 1122.0, 160.0, 0.0, 0.0 ],
 					"style" : "",
 					"varname" : "2_gamma_g"
@@ -434,7 +460,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 1059.0, 160.0, 50.0, 20.0 ],
+					"patching_rect" : [ 984.0, 212.0, 50.0, 20.0 ],
 					"presentation_rect" : [ 1057.0, 160.0, 0.0, 0.0 ],
 					"style" : "",
 					"varname" : "2_gamma_r"
@@ -452,7 +478,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1059.0, 244.0, 140.0, 30.0 ],
+					"patching_rect" : [ 984.0, 296.0, 140.0, 30.0 ],
 					"presentation_rect" : [ 1057.0, 244.0, 0.0, 0.0 ],
 					"text" : "/bmc/2/gamma \"$1\" \"$2\" \"$3\" \"$4\" ",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
@@ -465,7 +491,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 87.0, 333.0, 49.0, 20.0 ],
+					"patching_rect" : [ 12.0, 385.0, 49.0, 20.0 ],
 					"presentation_rect" : [ 92.0, 337.0, 0.0, 0.0 ],
 					"style" : "",
 					"text" : "s toArd"
@@ -479,7 +505,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 92.0, 474.0, 47.0, 20.0 ],
+					"patching_rect" : [ 17.0, 526.0, 47.0, 20.0 ],
 					"style" : "",
 					"text" : "r toArd"
 				}
@@ -491,7 +517,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 93.0, 153.0, 49.0, 20.0 ],
+					"patching_rect" : [ 18.0, 205.0, 49.0, 20.0 ],
 					"style" : "",
 					"text" : "s toArd"
 				}
@@ -506,7 +532,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 988.0, 11.0, 50.0, 20.0 ],
+					"patching_rect" : [ 912.0, 62.0, 50.0, 20.0 ],
 					"presentation_rect" : [ 988.0, 9.0, 0.0, 0.0 ],
 					"style" : "",
 					"varname" : "1_lift_l"
@@ -522,7 +548,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 923.0, 11.0, 50.0, 20.0 ],
+					"patching_rect" : [ 847.0, 62.0, 50.0, 20.0 ],
 					"presentation_rect" : [ 923.0, 9.0, 0.0, 0.0 ],
 					"style" : "",
 					"varname" : "1_lift_b"
@@ -536,7 +562,7 @@
 					"numinlets" : 4,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 796.0, 64.0, 57.0, 20.0 ],
+					"patching_rect" : [ 721.0, 116.0, 57.0, 20.0 ],
 					"presentation_rect" : [ 796.0, 62.0, 0.0, 0.0 ],
 					"style" : "",
 					"text" : "pak f f f f"
@@ -552,7 +578,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 861.0, 11.0, 50.0, 20.0 ],
+					"patching_rect" : [ 785.0, 62.0, 50.0, 20.0 ],
 					"presentation_rect" : [ 861.0, 9.0, 0.0, 0.0 ],
 					"style" : "",
 					"varname" : "1_lift_g"
@@ -568,7 +594,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 796.0, 11.0, 50.0, 20.0 ],
+					"patching_rect" : [ 720.0, 62.0, 50.0, 20.0 ],
 					"presentation_rect" : [ 796.0, 9.0, 0.0, 0.0 ],
 					"style" : "",
 					"varname" : "1_lift_r"
@@ -586,7 +612,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 796.0, 95.0, 140.0, 30.0 ],
+					"patching_rect" : [ 721.0, 147.0, 140.0, 30.0 ],
 					"presentation_rect" : [ 796.0, 93.0, 0.0, 0.0 ],
 					"text" : "/bmc/1/lift \"$1\" \"$2\" \"$3\" \"$4\" ",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
@@ -602,7 +628,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 1517.0, 12.0, 50.0, 20.0 ],
+					"patching_rect" : [ 1441.0, 62.0, 50.0, 20.0 ],
 					"presentation_rect" : [ 1367.0, 16.0, 0.0, 0.0 ],
 					"style" : "",
 					"varname" : "1_gain_l"
@@ -618,7 +644,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 1456.0, 13.0, 50.0, 20.0 ],
+					"patching_rect" : [ 1380.0, 62.0, 50.0, 20.0 ],
 					"presentation_rect" : [ 1302.0, 16.0, 0.0, 0.0 ],
 					"style" : "",
 					"varname" : "1_gain_b"
@@ -632,7 +658,7 @@
 					"numinlets" : 4,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1329.0, 66.0, 57.0, 20.0 ],
+					"patching_rect" : [ 1254.0, 118.0, 57.0, 20.0 ],
 					"presentation_rect" : [ 1175.0, 69.0, 0.0, 0.0 ],
 					"style" : "",
 					"text" : "pak f f f f"
@@ -648,7 +674,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 1394.0, 13.0, 50.0, 20.0 ],
+					"patching_rect" : [ 1318.0, 62.0, 50.0, 20.0 ],
 					"presentation_rect" : [ 1240.0, 16.0, 0.0, 0.0 ],
 					"style" : "",
 					"varname" : "1_gain_g"
@@ -664,7 +690,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 1329.0, 13.0, 50.0, 20.0 ],
+					"patching_rect" : [ 1253.0, 62.0, 50.0, 20.0 ],
 					"presentation_rect" : [ 1175.0, 16.0, 0.0, 0.0 ],
 					"style" : "",
 					"varname" : "1_gain_r"
@@ -682,7 +708,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1329.0, 97.0, 151.0, 30.0 ],
+					"patching_rect" : [ 1254.0, 149.0, 151.0, 30.0 ],
 					"presentation_rect" : [ 1175.0, 100.0, 0.0, 0.0 ],
 					"text" : "/bmc/1/gain \"$1\" \"$2\" \"$3\" \"$4\" ",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
@@ -698,7 +724,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 1251.0, 10.0, 50.0, 20.0 ],
+					"patching_rect" : [ 1175.0, 62.0, 50.0, 20.0 ],
 					"presentation_rect" : [ 973.0, 41.0, 0.0, 0.0 ],
 					"style" : "",
 					"varname" : "1_gamma_l"
@@ -714,7 +740,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 1186.0, 10.0, 50.0, 20.0 ],
+					"patching_rect" : [ 1110.0, 62.0, 50.0, 20.0 ],
 					"presentation_rect" : [ 908.0, 41.0, 0.0, 0.0 ],
 					"style" : "",
 					"varname" : "1_gamma_b"
@@ -728,7 +754,7 @@
 					"numinlets" : 4,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1059.0, 63.0, 57.0, 20.0 ],
+					"patching_rect" : [ 984.0, 115.0, 57.0, 20.0 ],
 					"style" : "",
 					"text" : "pak f f f f"
 				}
@@ -743,7 +769,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 1124.0, 10.0, 50.0, 20.0 ],
+					"patching_rect" : [ 1048.0, 62.0, 50.0, 20.0 ],
 					"presentation_rect" : [ 871.0, 41.0, 0.0, 0.0 ],
 					"style" : "",
 					"varname" : "1_gamma_g"
@@ -759,7 +785,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 1059.0, 10.0, 50.0, 20.0 ],
+					"patching_rect" : [ 983.0, 62.0, 50.0, 20.0 ],
 					"presentation_rect" : [ 806.0, 38.0, 0.0, 0.0 ],
 					"style" : "",
 					"varname" : "1_gamma_r"
@@ -777,7 +803,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1059.0, 94.0, 140.0, 30.0 ],
+					"patching_rect" : [ 984.0, 146.0, 140.0, 30.0 ],
 					"presentation_rect" : [ 806.0, 91.0, 0.0, 0.0 ],
 					"text" : "/bmc/1/gamma \"$1\" \"$2\" \"$3\" \"$4\" ",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
@@ -791,7 +817,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 174.0, 376.0, 73.0, 73.0 ],
+					"patching_rect" : [ 99.0, 428.0, 73.0, 73.0 ],
 					"style" : ""
 				}
 
@@ -804,7 +830,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 589.5, 41.0, 50.0, 20.0 ],
+					"patching_rect" : [ 514.5, 93.0, 50.0, 20.0 ],
 					"presentation_rect" : [ 669.0, 45.0, 0.0, 0.0 ],
 					"style" : "",
 					"varname" : "1_sensorGain"
@@ -819,7 +845,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 583.5, 211.0, 50.0, 20.0 ],
+					"patching_rect" : [ 508.5, 263.0, 50.0, 20.0 ],
 					"style" : "",
 					"varname" : "2_sensorGain"
 				}
@@ -835,7 +861,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 589.5, 94.0, 151.0, 18.0 ],
+					"patching_rect" : [ 514.5, 146.0, 151.0, 18.0 ],
 					"presentation_rect" : [ 591.0, 93.0, 0.0, 0.0 ],
 					"text" : "/bmc/1/sensorGain \"$1\" ",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
@@ -852,7 +878,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 583.5, 260.0, 151.0, 18.0 ],
+					"patching_rect" : [ 508.5, 312.0, 151.0, 18.0 ],
 					"presentation_rect" : [ 585.0, 202.0, 0.0, 0.0 ],
 					"text" : "/bmc/2/sensorGain \"$1\" ",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
@@ -868,7 +894,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 93.0, 41.0, 50.0, 20.0 ],
+					"patching_rect" : [ 18.0, 93.0, 50.0, 20.0 ],
 					"presentation_rect" : [ 93.0, 41.0, 0.0, 0.0 ],
 					"style" : "",
 					"varname" : "1_aperture"
@@ -883,7 +909,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 409.0, 41.0, 50.0, 20.0 ],
+					"patching_rect" : [ 334.0, 93.0, 50.0, 20.0 ],
 					"presentation_rect" : [ 409.0, 41.0, 0.0, 0.0 ],
 					"style" : "",
 					"varname" : "1_whiteBalance"
@@ -899,7 +925,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 257.0, 41.0, 124.0, 20.0 ],
+					"patching_rect" : [ 182.0, 93.0, 124.0, 20.0 ],
 					"presentation_rect" : [ 257.0, 41.0, 0.0, 0.0 ],
 					"style" : "",
 					"varname" : "1_focus"
@@ -916,7 +942,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 409.0, 94.0, 151.0, 18.0 ],
+					"patching_rect" : [ 334.0, 146.0, 151.0, 18.0 ],
 					"presentation_rect" : [ 409.0, 94.0, 0.0, 0.0 ],
 					"text" : "/bmc/1/whiteBalance \"$1\" ",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
@@ -933,7 +959,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 257.0, 94.0, 140.0, 18.0 ],
+					"patching_rect" : [ 182.0, 146.0, 140.0, 18.0 ],
 					"presentation_rect" : [ 257.0, 94.0, 0.0, 0.0 ],
 					"text" : "/bmc/1/focus \"$1\" ",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
@@ -950,7 +976,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 93.0, 94.0, 140.0, 18.0 ],
+					"patching_rect" : [ 18.0, 146.0, 140.0, 18.0 ],
 					"presentation_rect" : [ 93.0, 94.0, 0.0, 0.0 ],
 					"text" : "/bmc/1/aperture \"$1\" ",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
@@ -966,7 +992,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 87.0, 207.0, 50.0, 20.0 ],
+					"patching_rect" : [ 12.0, 259.0, 50.0, 20.0 ],
 					"presentation_rect" : [ 81.0, 143.0, 0.0, 0.0 ],
 					"style" : "",
 					"varname" : "2_aperture"
@@ -981,7 +1007,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 403.0, 207.0, 50.0, 20.0 ],
+					"patching_rect" : [ 328.0, 259.0, 50.0, 20.0 ],
 					"style" : "",
 					"varname" : "2_whiteBalance"
 				}
@@ -996,7 +1022,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 251.0, 207.0, 130.0, 20.0 ],
+					"patching_rect" : [ 176.0, 259.0, 130.0, 20.0 ],
 					"style" : "",
 					"varname" : "2_focus"
 				}
@@ -1012,7 +1038,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 403.0, 260.0, 151.0, 18.0 ],
+					"patching_rect" : [ 328.0, 312.0, 151.0, 18.0 ],
 					"presentation_rect" : [ 403.0, 201.0, 0.0, 0.0 ],
 					"text" : "/bmc/2/whiteBalance \"$1\" ",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
@@ -1029,7 +1055,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 251.0, 260.0, 140.0, 18.0 ],
+					"patching_rect" : [ 176.0, 312.0, 140.0, 18.0 ],
 					"presentation_rect" : [ 250.0, 203.0, 0.0, 0.0 ],
 					"text" : "/bmc/2/focus \"$1\" ",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
@@ -1046,7 +1072,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 269.0, 474.0, 73.0, 18.0 ],
+					"patching_rect" : [ 194.0, 526.0, 73.0, 18.0 ],
 					"text" : "/getStatus 1 ",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
 				}
@@ -1062,7 +1088,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 174.0, 474.0, 73.0, 18.0 ],
+					"patching_rect" : [ 99.0, 526.0, 73.0, 18.0 ],
 					"text" : "/ping 1 ",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
 				}
@@ -1078,7 +1104,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 87.0, 260.0, 140.0, 18.0 ],
+					"patching_rect" : [ 12.0, 312.0, 140.0, 18.0 ],
 					"text" : "/bmc/2/aperture \"$1\" ",
 					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
 				}
@@ -1090,7 +1116,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 92.0, 598.0, 99.0, 20.0 ],
+					"patching_rect" : [ 17.0, 650.0, 99.0, 20.0 ],
 					"style" : "",
 					"text" : "print @popup 1"
 				}
@@ -1103,7 +1129,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 92.0, 567.0, 99.0, 20.0 ],
+					"patching_rect" : [ 17.0, 619.0, 99.0, 20.0 ],
 					"style" : "",
 					"text" : "udpreceive 8000"
 				}
@@ -1115,7 +1141,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 92.0, 529.0, 250.0, 20.0 ],
+					"patching_rect" : [ 17.0, 581.0, 250.0, 20.0 ],
 					"style" : "",
 					"text" : "udpsend 192.168.0.66 8888"
 				}

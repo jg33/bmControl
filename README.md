@@ -7,3 +7,6 @@ A complete interface for programatic control of Black Magic Design cameras via t
 
 # Dependencies
 * OSCuino: https://github.com/CNMAT/OSC
+
+# License
+GPL 3.0 - http://www.gnu.org/licenses/
