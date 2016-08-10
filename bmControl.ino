@@ -101,13 +101,15 @@ void parseBmcMsg(OSCMessage &_msg, int offset) {
   Serial.println(cmd);
 
   if (cmd == "aperture") {
-    setAperture(cam, _msg.getInt(0));
-  } else if (_msg.fullMatch("/bmc/1/focus",0)) {
+    setAperture(cam, _msg.getFloat(0));
+  } else if (cmd == "focus") {
     setFocus(cam, _msg.getFloat(0));
-  } else if (_msg.fullMatch("/bmc/1/exposure",0)) {
+  } else if (cmd == "exposure") {
     setExposure(cam, _msg.getInt(0));
-  } else if (_msg.fullMatch("/bmc/1/gain",0)) {
+  } else if (cmd == "gain") {
     setGain(cam, _msg.getInt(0));
+  } else if (cmd == "whiteBalance") {
+    setWhiteBalance(cam, _msg.getInt(0));
   } else {
 
     Serial.println("[ERR] command not regognized...");
@@ -245,7 +247,7 @@ void setGain(int _camera, int _value) {
 void setWhiteBalance(int _camera, int _value){
   // FORMAT: Int16: White Balance in Kelvin (3200 - 7500)
   cameras[_camera].whiteBalance = _value;
-  sdiCam.writeCommandInt8(_camera, 1, 2, 0, cameras[_camera].whiteBalance); //
+  sdiCam.writeCommandInt16(_camera, 1, 2, 0, cameras[_camera].whiteBalance); //
   
 }
 
