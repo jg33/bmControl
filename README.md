@@ -14,13 +14,13 @@ A complete interface for programatic control of Black Magic Design cameras via t
 OSC Commands
 * "/ping" returns "/pong"
 * "/getStatus '<camera number>'" int, 0-n, returns multiple "/status/<camera number>/<variable> <value>"
-* "/bmc/'<camera number>'/aperture '<value>'" float, 0.-22.
-* "/bmc/'<camera number>'focus '<value>'" float, 0.-22.
-* "/bmc/'<camera number>'/whiteBalance '<value>'" int, 3000-7500
-* "/bmc/'<camera number>'/sensorGain '<value>'" int, 1,2,4,8 or 16
-* "/bmc/'<camera number>'/lift <red> <green> <blue> <luma>" four floats, -4.-4.
-* "/bmc/'<camera number>'/gamma <red> <green> <blue> <luma>" four floats, -4.-4.
-* "/bmc/'<camera number>'/gain <red> <green> <blue> <luma>" four floats, -4.-4.
+* "/bmc/\<camera number>/aperture \<value>" float, 0.-22.
+* "/bmc/\<camera number>/focus \<value>" float, 0.-22.
+* "/bmc/\<camera number>/whiteBalance \<value>" int, 3000-7500
+* "/bmc/\<camera number>/sensorGain \<value>" int, 1,2,4,8 or 16
+* "/bmc/\<camera number>/lift <red> <green> <blue> <luma>" four floats, -4.-4.
+* "/bmc/\<camera number>/gamma <red> <green> <blue> <luma>" four floats, -4.-4.
+* "/bmc/\<camera number>/gain <red> <green> <blue> <luma>" four floats, -4.-4.
 
 
 ## License
