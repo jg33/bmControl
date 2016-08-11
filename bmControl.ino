@@ -29,8 +29,8 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU General Public License for more details.
 
-  You should have received a copy of the GNU General Public License
-  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 // Libraries //
@@ -109,8 +109,9 @@ void parseBmcMsg(OSCMessage &_msg, int offset) {
   int cam = getAddressSegment(address,1).toInt(); //get address segment 1
   String cmd = getAddressSegment(address,2); //get address segment 2
   
-  Serial.println(cam);
-  Serial.println(cmd);
+//  Serial.println(cam);
+//  Serial.println(cmd);
+  
 
   if (cmd == "aperture") {
     setAperture(cam, _msg.getFloat(0));
@@ -152,21 +153,18 @@ void parseBmcMsg(OSCMessage &_msg, int offset) {
 
   }
 
-  blink();
-
 }
 
 void pingPong(OSCMessage &_msg, int val) {
-  blink();
+//  blink();
 
-  Serial.println("pinged.");
+//  Serial.println("pinged.");
   OSCMessage reply("/pong");
-  reply.add((int32_t)1);
+//  reply.add((int32_t)1);
   Udp.beginPacket(replyIp,replyPort);
   reply.send(Udp);
   Udp.endPacket();
   reply.empty();
-
 
 }
 
@@ -183,17 +181,58 @@ void setReplyPort(OSCMessage &_msg, int val) {
 }
 
 void getStatus(OSCMessage &_msg, int camNum){
-  
-  if(true){
-    OSCMessage reply("/status");
-    reply.add((int32_t)1);
-    reply.add("/status/1/exposure").add((int32_t)cameras[1].exposure);
+    camNum = _msg.getInt(0);
+    OSCBundle reply;
+    //reply.beginMessage(makeStatusAddr(camNum,"aperture"));
+    reply.add(makeStatusAddr(camNum,"aperture")).add((float)cameras[camNum].aperture);
     Udp.beginPacket(replyIp,replyPort);
     reply.send(Udp);
     Udp.endPacket();
     reply.empty();
+
+    reply.add(makeStatusAddr(camNum,"focus")).add((float)cameras[camNum].focus);
+    Udp.beginPacket(replyIp,replyPort);
+    reply.send(Udp);
+    Udp.endPacket();
+    reply.empty();
+
+    reply.add(makeStatusAddr(camNum,"exposure")).add((int32_t)cameras[camNum].exposure);
+    Udp.beginPacket(replyIp,replyPort);
+    reply.send(Udp);
+    Udp.endPacket();
+    reply.empty();
+
+    reply.add(makeStatusAddr(camNum,"sensorGain")).add((int32_t)cameras[camNum].sensorGain);
+    Udp.beginPacket(replyIp,replyPort);
+    reply.send(Udp);
+    Udp.endPacket();
+    reply.empty();
+
+    reply.add(makeStatusAddr(camNum,"whiteBalance")).add((int32_t)cameras[camNum].whiteBalance);
+    Udp.beginPacket(replyIp,replyPort);
+    reply.send(Udp);
+    Udp.endPacket();
+    reply.empty();
+    
+    reply.add(makeStatusAddr(camNum,"lift")).add((int32_t)cameras[camNum].lift[0]).add((float)cameras[camNum].lift[1]).add((float)cameras[camNum].lift[2]).add((float)cameras[camNum].lift[3]);
+    Udp.beginPacket(replyIp,replyPort);
+    reply.send(Udp);
+    Udp.endPacket();
+    reply.empty();
+
+    reply.add(makeStatusAddr(camNum,"gamma")).add((int32_t)cameras[camNum].gamma[0]).add((float)cameras[camNum].gamma[1]).add((float)cameras[camNum].gamma[2]).add((float)cameras[camNum].gamma[3]);
+    Udp.beginPacket(replyIp,replyPort);
+    reply.send(Udp);
+    Udp.endPacket();
+    reply.empty();
+    
+    reply.add(makeStatusAddr(camNum,"gain")).add((int32_t)cameras[camNum].gain[0]).add((float)cameras[camNum].gain[1]).add((float)cameras[camNum].gain[2]).add((float)cameras[camNum].gain[3]);
+    Udp.beginPacket(replyIp,replyPort);
+    reply.send(Udp);
+    Udp.endPacket();
+    reply.empty();
+
   
-  }
   
 }
 
@@ -207,14 +246,14 @@ void loop() {
    
    // --- receive a bundle  --- //
    if( (size = Udp.parsePacket())>0) {
-     Serial.println("Packet Received...");
+//     Serial.println("Packet Received...");
 
 
     while(size--)
         bndl.fill(Udp.read());
 
         if(!bndl.hasError()){
-           Serial.println("no err");
+//           Serial.println("no err");
              if(bndl.size() > 0) {
                 static int32_t sequencenumber=0;
                 bndl.route("/ping", pingPong);    
@@ -233,16 +272,7 @@ void loop() {
    }
   // --- //
   
-  
-    //  DEBUGGINs //
-//  Serial.print("Set Aperture to: ");
-//  Serial.println(debugApt);
-//  setAperture(0,debugApt);
-//  debugApt++;
-//  debugApt = debugApt % 16;
-//
-//  delay(1000);
-//  Serial.println("delayed");
+ // blink();
 
 }
 
@@ -353,6 +383,20 @@ String getAddressSegment(String _fullAddress, int segment){ //for getting indivi
 //  Serial.print("substring: ");
 //  Serial.println(_fullAddress.substring(startSlashIndex+1, endSlashIndex));
   return _fullAddress.substring(startSlashIndex+1, endSlashIndex);
+  
+}
+
+char* makeStatusAddr(int _camNum, String _variable){
+  char buffer[256];
+  String addr("/status/");
+  addr+=_camNum;
+  addr+="/";
+  addr+=_variable;
+  
+  addr.toCharArray(buffer, 256);
+  Serial.println(buffer);
+
+  return buffer;
   
 }
 
