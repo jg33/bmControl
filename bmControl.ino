@@ -17,7 +17,7 @@
 
  OSC Message Formatting:
  /bmc/[camera number]/[command] [value(s)]
- 
+
  Licensed under GPL 3.
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -86,7 +86,7 @@ byte replyIp[]  = { 192, 168, 0, 13 };
 void setup() {
   Serial.begin(115200);
   Serial.println("Hi.");
-  
+
   // Network Setup //
   Ethernet.begin(mac, ip);
   Udp.begin(oscReceivePort);
@@ -108,10 +108,10 @@ void parseBmcMsg(OSCMessage &_msg, int offset) {
   _msg.getAddress(address,0);
   int cam = getAddressSegment(address,1).toInt(); //get address segment 1
   String cmd = getAddressSegment(address,2); //get address segment 2
-  
+
 //  Serial.println(cam);
 //  Serial.println(cmd);
-  
+
 
   if (cmd == "aperture") {
     setAperture(cam, _msg.getFloat(0));
@@ -148,7 +148,7 @@ void parseBmcMsg(OSCMessage &_msg, int offset) {
 
     Serial.println("[ERR] command not regognized...");
     char buff[16];
-    _msg.getAddress(buff,0); 
+    _msg.getAddress(buff,0);
     Serial.println(buff);
 
   }
@@ -213,7 +213,7 @@ void getStatus(OSCMessage &_msg, int camNum){
     reply.send(Udp);
     Udp.endPacket();
     reply.empty();
-    
+
     reply.add(makeStatusAddr(camNum,"lift")).add((int32_t)cameras[camNum].lift[0]).add((float)cameras[camNum].lift[1]).add((float)cameras[camNum].lift[2]).add((float)cameras[camNum].lift[3]);
     Udp.beginPacket(replyIp,replyPort);
     reply.send(Udp);
@@ -225,25 +225,25 @@ void getStatus(OSCMessage &_msg, int camNum){
     reply.send(Udp);
     Udp.endPacket();
     reply.empty();
-    
+
     reply.add(makeStatusAddr(camNum,"gain")).add((int32_t)cameras[camNum].gain[0]).add((float)cameras[camNum].gain[1]).add((float)cameras[camNum].gain[2]).add((float)cameras[camNum].gain[3]);
     Udp.beginPacket(replyIp,replyPort);
     reply.send(Udp);
     Udp.endPacket();
     reply.empty();
 
-  
-  
+
+
 }
 
 // ---- LOOP ---- //
 
 void loop() {
- 
+
   // check for new bundles ///
    OSCBundle bndl;
    int size;
-   
+
    // --- receive a bundle  --- //
    if( (size = Udp.parsePacket())>0) {
 //     Serial.println("Packet Received...");
@@ -256,10 +256,10 @@ void loop() {
 //           Serial.println("no err");
              if(bndl.size() > 0) {
                 static int32_t sequencenumber=0;
-                bndl.route("/ping", pingPong);    
+                bndl.route("/ping", pingPong);
                 bndl.route("/bmc", parseBmcMsg);
-            
-                bndl.route("/bmcRawVoid", writeRawVoid );    
+
+                bndl.route("/bmcRawVoid", writeRawVoid );
                 bndl.route("/getStatus", getStatus);
                 bndl.route("/setReplyPort", setReplyPort);
                 bndl.route("/setReplyIp", setReplyIp);
@@ -267,11 +267,11 @@ void loop() {
 
              }
         } else{
-         Serial.println("Error."); 
+         Serial.println("Error.");
         }
    }
   // --- //
-  
+
  // blink();
 
 }
@@ -313,7 +313,7 @@ void setWhiteBalance(int _camera, int _value){
   // FORMAT: Int16: White Balance in Kelvin (3200 - 7500)
   cameras[_camera].whiteBalance = _value;
   sdiCam.writeCommandInt16(_camera, 1, 2, 0, cameras[_camera].whiteBalance); //
-  
+
 }
 
 void setLift(int _camera, float _rgbl[4]){
@@ -374,16 +374,16 @@ void blink() {
 String getAddressSegment(String _fullAddress, int segment){ //for getting individual elements of OSC addresses
   int startSlashIndex=0;
   int endSlashIndex;
-  
+
   for(int i=0;i<segment;i++){
     startSlashIndex= _fullAddress.indexOf("/", startSlashIndex+1);
   }
-  
+
   endSlashIndex =  _fullAddress.indexOf("/", startSlashIndex+1);
 //  Serial.print("substring: ");
 //  Serial.println(_fullAddress.substring(startSlashIndex+1, endSlashIndex));
   return _fullAddress.substring(startSlashIndex+1, endSlashIndex);
-  
+
 }
 
 char* makeStatusAddr(int _camNum, String _variable){
@@ -392,11 +392,10 @@ char* makeStatusAddr(int _camNum, String _variable){
   addr+=_camNum;
   addr+="/";
   addr+=_variable;
-  
+
   addr.toCharArray(buffer, 256);
   Serial.println(buffer);
 
   return buffer;
-  
-}
 
+}
