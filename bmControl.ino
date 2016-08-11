@@ -8,7 +8,7 @@
  	Board Used:
    	* Arduino Ethernet Rev 3
 
-	Shields used:
+	Shield used:
  	* Black Magic Arduino SDI Shield
 
  	3rd Party Libraries Used:
@@ -103,7 +103,7 @@ void setup() {
 
 // --- OSC Messages --- //
 void parseBmcMsg(OSCMessage &_msg, int offset) {
-  
+
   char address[256];
   _msg.getAddress(address,0);
   int cam = getAddressSegment(address,1).toInt(); //get address segment 1
