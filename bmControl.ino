@@ -50,7 +50,7 @@
 // Ethernet Stuff //
 EthernetUDP Udp;
 IPAddress targetIp(192, 168, 0, 13);
-byte mac[] = {0x90, 0xA2, 0xDA, 0x10, 0x63, 0x08};
+byte mac[] = {0x90, 0xA2, 0xDA, 0x10, 0x63, 0x69};
 byte ip[] = {DEFAULT_IP_ADDRESS};
 char packetBuffer[UDP_TX_PACKET_MAX_SIZE];  //buffer to hold incoming packet,
 char  sendBuffer[] = "acknowledged...";       // a string to send back
