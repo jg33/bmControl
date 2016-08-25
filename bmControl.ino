@@ -49,7 +49,7 @@
 
 // Ethernet Stuff //
 EthernetUDP Udp;
-IPAddress targetIp(192, 168, 0, 13);
+IPAddress targetIp(192,168,0,255);
 byte mac[] = {0x90, 0xA2, 0xDA, 0x10, 0x63, 0x69};
 byte ip[] = {DEFAULT_IP_ADDRESS};
 char packetBuffer[UDP_TX_PACKET_MAX_SIZE];  //buffer to hold incoming packet,
@@ -58,6 +58,7 @@ char  sendBuffer[] = "acknowledged...";       // a string to send back
 // OSC Stuff //
 int oscReceivePort = DEFAULT_OSC_RECEIVE_PORT;
 float replyPort = 8000; //where to respond to pings and gets
+byte replyIp[]  = { 192,168,0,255 };
 
 // Camera Communication Stuff //
 const int                 shieldAddress = 0x6E;
@@ -74,13 +75,14 @@ struct Camera{
   float lift[4];
   float gamma[4];
   float gain[4];
+  float hue;
+  float saturation;
 };
 Camera cameras[NUM_CAMERAS+1];
 
 
 //debug stuff
 int debugApt = 0; //testing aperture
-byte replyIp[]  = { 192, 168, 0, 13 };
 
 // ---- Main ---- //
 void setup() {
@@ -144,6 +146,11 @@ void parseBmcMsg(OSCMessage &_msg, int offset) {
     input[2] = _msg.getFloat(2);
     input[3] = _msg.getFloat(3);
     setGain(cam, input);
+  } else if(cmd== "hue"){
+    setHue(cam, _msg.getFloat(0));
+  } else if (cmd=="saturation"){
+    setSat(cam, _msg.getFloat(0));
+
   }else {
 
     Serial.println("[ERR] command not regognized...");
@@ -232,7 +239,17 @@ void getStatus(OSCMessage &_msg, int camNum){
     Udp.endPacket();
     reply.empty();
 
-
+    reply.add(makeStatusAddr(camNum,"whiteBalance")).add((int32_t)cameras[camNum].hue);
+    Udp.beginPacket(replyIp,replyPort);
+    reply.send(Udp);
+    Udp.endPacket();
+    reply.empty();
+    
+    reply.add(makeStatusAddr(camNum,"whiteBalance")).add((int32_t)cameras[camNum].saturation);
+    Udp.beginPacket(replyIp,replyPort);
+    reply.send(Udp);
+    Udp.endPacket();
+    reply.empty();
 
 }
 
@@ -347,6 +364,18 @@ void setGain(int _camera, float _rgbl[4]){
 
   sdiCam.writeCommandFixed16(_camera, 8, 1, 0, cameras[_camera].gain ); //
 
+}
+
+void setHue(int _camera, float _value){
+  cameras[_camera].hue = _value;
+  float colorCombined[2] = {cameras[_camera].hue, cameras[_camera].saturation};
+  sdiCam.writeCommandFixed16(_camera,8,6,0,colorCombined);
+}
+
+void setSat(int _camera, float _value){
+  cameras[_camera].saturation = _value;
+  float colorCombined[2] = {cameras[_camera].hue, cameras[_camera].saturation};
+  sdiCam.writeCommandFixed16(_camera,8,6,0,colorCombined);
 }
 
 // ---- Raw Commands ---- //

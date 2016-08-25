@@ -1,0 +1,126 @@
+{
+	"pattrstorage" : 	{
+		"name" : "copresenceScenes",
+		"slots" : 		{
+			"1" : 			{
+				"id" : 1,
+				"data" : 				{
+					"1_aperture" : [ 2.0 ],
+					"1_focus" : [ 0.775 ],
+					"1_gain_b" : [ 0.0 ],
+					"1_gain_g" : [ 0.0 ],
+					"1_gain_l" : [ 0.0 ],
+					"1_gain_r" : [ 0.0 ],
+					"1_gamma_b" : [ 0.0 ],
+					"1_gamma_g" : [ 0.0 ],
+					"1_gamma_l" : [ -0.24 ],
+					"1_gamma_r" : [ 0.0 ],
+					"1_lift_b" : [ 0.0 ],
+					"1_lift_g" : [ 0.0 ],
+					"1_lift_l" : [ -0.06 ],
+					"1_lift_r" : [ 0.0 ],
+					"1_sensorGain" : [ 8 ],
+					"1_whiteBalance" : [ 3400 ],
+					"2_aperture" : [ 2.6 ],
+					"2_focus" : [ 0.765 ],
+					"2_gain_b" : [ 0.0 ],
+					"2_gain_g" : [ 0.0 ],
+					"2_gain_l" : [ 0.0 ],
+					"2_gain_r" : [ 0.0 ],
+					"2_gamma_b" : [ 0.0 ],
+					"2_gamma_g" : [ 0.0 ],
+					"2_gamma_l" : [ -0.24 ],
+					"2_gamma_r" : [ 0.0 ],
+					"2_lift_b" : [ 0.0 ],
+					"2_lift_g" : [ 0.0 ],
+					"2_lift_l" : [ -0.06 ],
+					"2_lift_r" : [ 0.0 ],
+					"2_sensorGain" : [ 8 ],
+					"2_whiteBalance" : [ 3400 ]
+				}
+
+			}
+,
+			"2" : 			{
+				"id" : 2,
+				"data" : 				{
+					"1_aperture" : [ 1.0 ],
+					"1_focus" : [ 0.775 ],
+					"1_gain_b" : [ 0.0 ],
+					"1_gain_g" : [ 0.0 ],
+					"1_gain_l" : [ 0.0 ],
+					"1_gain_r" : [ 0.0 ],
+					"1_gamma_b" : [ 0.0 ],
+					"1_gamma_g" : [ 0.0 ],
+					"1_gamma_l" : [ 0.0 ],
+					"1_gamma_r" : [ 0.0 ],
+					"1_lift_b" : [ 0.0 ],
+					"1_lift_g" : [ 0.0 ],
+					"1_lift_l" : [ -0.32 ],
+					"1_lift_r" : [ 0.0 ],
+					"1_sensorGain" : [ 8 ],
+					"1_whiteBalance" : [ 3400 ],
+					"2_aperture" : [ 2.5 ],
+					"2_focus" : [ 0.76 ],
+					"2_gain_b" : [ 0.0 ],
+					"2_gain_g" : [ 0.0 ],
+					"2_gain_l" : [ 0.0 ],
+					"2_gain_r" : [ 0.0 ],
+					"2_gamma_b" : [ 0.0 ],
+					"2_gamma_g" : [ 0.0 ],
+					"2_gamma_l" : [ -0.24 ],
+					"2_gamma_r" : [ 0.0 ],
+					"2_lift_b" : [ 0.0 ],
+					"2_lift_g" : [ 0.0 ],
+					"2_lift_l" : [ -0.06 ],
+					"2_lift_r" : [ 0.0 ],
+					"2_sensorGain" : [ 8 ],
+					"2_whiteBalance" : [ 3400 ]
+				}
+
+			}
+,
+			"3" : 			{
+				"id" : 3,
+				"data" : 				{
+					"1_aperture" : [ 1.0 ],
+					"1_focus" : [ 0.744 ],
+					"1_gain_b" : [ 0.0 ],
+					"1_gain_g" : [ 0.0 ],
+					"1_gain_l" : [ 0.0 ],
+					"1_gain_r" : [ 0.0 ],
+					"1_gamma_b" : [ 0.0 ],
+					"1_gamma_g" : [ 0.0 ],
+					"1_gamma_l" : [ -0.24 ],
+					"1_gamma_r" : [ 0.0 ],
+					"1_lift_b" : [ 0.0 ],
+					"1_lift_g" : [ 0.0 ],
+					"1_lift_l" : [ -0.06 ],
+					"1_lift_r" : [ 0.0 ],
+					"1_sensorGain" : [ 8 ],
+					"1_whiteBalance" : [ 3400 ],
+					"2_aperture" : [ 2.6 ],
+					"2_focus" : [ 0.76 ],
+					"2_gain_b" : [ 0.0 ],
+					"2_gain_g" : [ 0.0 ],
+					"2_gain_l" : [ 0.0 ],
+					"2_gain_r" : [ 0.0 ],
+					"2_gamma_b" : [ 0.0 ],
+					"2_gamma_g" : [ 0.0 ],
+					"2_gamma_l" : [ -0.24 ],
+					"2_gamma_r" : [ 0.0 ],
+					"2_lift_b" : [ 0.0 ],
+					"2_lift_g" : [ 0.0 ],
+					"2_lift_l" : [ -0.06 ],
+					"2_lift_r" : [ 0.0 ],
+					"2_sensorGain" : [ 8 ],
+					"2_whiteBalance" : [ 3400 ]
+				}
+
+			}
+
+		}
+
+	}
+
+}
