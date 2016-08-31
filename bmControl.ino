@@ -52,7 +52,7 @@ EthernetUDP Udp;
 IPAddress targetIp(192,168,0,255);
 byte mac[] = {0x90, 0xA2, 0xDA, 0x10, 0x63, 0x69};
 byte ip[] = {DEFAULT_IP_ADDRESS};
-char packetBuffer[UDP_TX_PACKET_MAX_SIZE];  //buffer to hold incoming packet,
+char packetBuffer[256];  //buffer to hold incoming packet,
 char  sendBuffer[] = "acknowledged...";       // a string to send back
 
 // OSC Stuff //
@@ -86,19 +86,19 @@ int debugApt = 0; //testing aperture
 
 // ---- Main ---- //
 void setup() {
-  Serial.begin(115200);
-  Serial.println("Hi.");
+//  Serial.begin(115200);
+//  Serial.println("Hi.");
 
   // Network Setup //
   Ethernet.begin(mac, ip);
   Udp.begin(oscReceivePort);
-  Serial.println("Enet Enabled.");
+//  Serial.println("Enet Enabled.");
 
   // Camera Setup //
   sdiCam.begin();
   Wire.setClock(400000); // Set max I2C speed
   sdiCam.setOverride(true);
-  Serial.println("SDI Enabled.");
+//  Serial.println("SDI Enabled.");
 
 
 }
@@ -153,13 +153,71 @@ void parseBmcMsg(OSCMessage &_msg, int offset) {
 
   }else {
 
-    Serial.println("[ERR] command not regognized...");
+//    Serial.println("[ERR] command not regognized...");
     char buff[16];
     _msg.getAddress(buff,0);
-    Serial.println(buff);
+//    Serial.println(buff);
 
   }
 
+}
+
+void bigMess(OSCMessage &_msg, int val){
+  char address[256];
+  _msg.getAddress(address,0);
+  int cam = getAddressSegment(address,1).toInt(); //get address segment 1
+  
+ // float thisFloat = _msg.getFloat(0);
+   setFocus(cam, _msg.getFloat(0));
+    setAperture(cam, _msg.getFloat(1));
+//  setExposure(cam, _msg.getInt(0));
+    setSat(cam, _msg.getFloat(2));
+    setHue(cam, _msg.getFloat(3));
+    setSensorGain(cam, _msg.getInt(4));
+    setWhiteBalance(cam, _msg.getFloat(5));
+    
+    
+//  char msgString[256];
+//  _msg.getString(0,msgString,256 );
+//  float thisFloat = getAddressSegment(msgString,0).toFloat();
+//   setFocus(cam, thisFloat);
+//   thisFloat = getAddressSegment(msgString,1).toFloat();
+//    setAperture(cam, thisFloat);
+////  setExposure(cam, _msg.getInt(0));
+//     thisFloat = getAddressSegment(msgString,2).toFloat();
+//    setSat(cam, thisFloat);
+//    thisFloat = getAddressSegment(msgString,3).toFloat();
+//    setHue(cam, thisFloat);
+//    float thisInt = getAddressSegment(msgString,4).toInt();
+//
+//    setSensorGain(cam, thisInt);
+//    thisInt = getAddressSegment(msgString,4).toInt();
+//    setWhiteBalance(cam, thisInt);
+
+//    float lift[4];
+//    lift[0] = thisFloat;
+//    lift[1] = thisFloat;
+//    lift[2] = thisFloat;
+//    lift[3] = thisFloat;
+//    setLift(cam, lift);
+//
+//    float gamma[4];
+//    gamma[0] = _msg.getFloat(8);
+//    gamma[1] = _msg.getFloat(8);
+//    gamma[2] = _msg.getFloat(8);
+//    gamma[3] = _msg.getFloat(8);
+//    setGamma(cam, gamma);
+//    float gain[4];
+//    gain[0] = _msg.getFloat(8);
+//    gain[1] = _msg.getFloat(8);
+//    gain[2] = _msg.getFloat(8);
+//    gain[3] = _msg.getFloat(8);
+//    setGain(cam, gain);
+//       Serial.print("got here: ");
+     //  Serial.println(_msg.getFloat(1));
+
+
+  
 }
 
 void pingPong(OSCMessage &_msg, int val) {
@@ -187,71 +245,71 @@ void setReplyPort(OSCMessage &_msg, int val) {
   replyPort = _msg.getInt(0);
 }
 
-void getStatus(OSCMessage &_msg, int camNum){
-    camNum = _msg.getInt(0);
-    OSCBundle reply;
-    //reply.beginMessage(makeStatusAddr(camNum,"aperture"));
-    reply.add(makeStatusAddr(camNum,"aperture")).add((float)cameras[camNum].aperture);
-    Udp.beginPacket(replyIp,replyPort);
-    reply.send(Udp);
-    Udp.endPacket();
-    reply.empty();
-
-    reply.add(makeStatusAddr(camNum,"focus")).add((float)cameras[camNum].focus);
-    Udp.beginPacket(replyIp,replyPort);
-    reply.send(Udp);
-    Udp.endPacket();
-    reply.empty();
-
-    reply.add(makeStatusAddr(camNum,"exposure")).add((int32_t)cameras[camNum].exposure);
-    Udp.beginPacket(replyIp,replyPort);
-    reply.send(Udp);
-    Udp.endPacket();
-    reply.empty();
-
-    reply.add(makeStatusAddr(camNum,"sensorGain")).add((int32_t)cameras[camNum].sensorGain);
-    Udp.beginPacket(replyIp,replyPort);
-    reply.send(Udp);
-    Udp.endPacket();
-    reply.empty();
-
-    reply.add(makeStatusAddr(camNum,"whiteBalance")).add((int32_t)cameras[camNum].whiteBalance);
-    Udp.beginPacket(replyIp,replyPort);
-    reply.send(Udp);
-    Udp.endPacket();
-    reply.empty();
-
-    reply.add(makeStatusAddr(camNum,"lift")).add((int32_t)cameras[camNum].lift[0]).add((float)cameras[camNum].lift[1]).add((float)cameras[camNum].lift[2]).add((float)cameras[camNum].lift[3]);
-    Udp.beginPacket(replyIp,replyPort);
-    reply.send(Udp);
-    Udp.endPacket();
-    reply.empty();
-
-    reply.add(makeStatusAddr(camNum,"gamma")).add((int32_t)cameras[camNum].gamma[0]).add((float)cameras[camNum].gamma[1]).add((float)cameras[camNum].gamma[2]).add((float)cameras[camNum].gamma[3]);
-    Udp.beginPacket(replyIp,replyPort);
-    reply.send(Udp);
-    Udp.endPacket();
-    reply.empty();
-
-    reply.add(makeStatusAddr(camNum,"gain")).add((int32_t)cameras[camNum].gain[0]).add((float)cameras[camNum].gain[1]).add((float)cameras[camNum].gain[2]).add((float)cameras[camNum].gain[3]);
-    Udp.beginPacket(replyIp,replyPort);
-    reply.send(Udp);
-    Udp.endPacket();
-    reply.empty();
-
-    reply.add(makeStatusAddr(camNum,"whiteBalance")).add((int32_t)cameras[camNum].hue);
-    Udp.beginPacket(replyIp,replyPort);
-    reply.send(Udp);
-    Udp.endPacket();
-    reply.empty();
-    
-    reply.add(makeStatusAddr(camNum,"whiteBalance")).add((int32_t)cameras[camNum].saturation);
-    Udp.beginPacket(replyIp,replyPort);
-    reply.send(Udp);
-    Udp.endPacket();
-    reply.empty();
-
-}
+//void getStatus(OSCMessage &_msg, int camNum){
+//    camNum = _msg.getInt(0);
+//    OSCBundle reply;
+//    //reply.beginMessage(makeStatusAddr(camNum,"aperture"));
+//    reply.add(makeStatusAddr(camNum,"aperture")).add((float)cameras[camNum].aperture);
+//    Udp.beginPacket(replyIp,replyPort);
+//    reply.send(Udp);
+//    Udp.endPacket();
+//    reply.empty();
+//
+//    reply.add(makeStatusAddr(camNum,"focus")).add((float)cameras[camNum].focus);
+//    Udp.beginPacket(replyIp,replyPort);
+//    reply.send(Udp);
+//    Udp.endPacket();
+//    reply.empty();
+//
+//    reply.add(makeStatusAddr(camNum,"exposure")).add((int32_t)cameras[camNum].exposure);
+//    Udp.beginPacket(replyIp,replyPort);
+//    reply.send(Udp);
+//    Udp.endPacket();
+//    reply.empty();
+//
+//    reply.add(makeStatusAddr(camNum,"sensorGain")).add((int32_t)cameras[camNum].sensorGain);
+//    Udp.beginPacket(replyIp,replyPort);
+//    reply.send(Udp);
+//    Udp.endPacket();
+//    reply.empty();
+//
+//    reply.add(makeStatusAddr(camNum,"whiteBalance")).add((int32_t)cameras[camNum].whiteBalance);
+//    Udp.beginPacket(replyIp,replyPort);
+//    reply.send(Udp);
+//    Udp.endPacket();
+//    reply.empty();
+//
+//    reply.add(makeStatusAddr(camNum,"lift")).add((int32_t)cameras[camNum].lift[0]).add((float)cameras[camNum].lift[1]).add((float)cameras[camNum].lift[2]).add((float)cameras[camNum].lift[3]);
+//    Udp.beginPacket(replyIp,replyPort);
+//    reply.send(Udp);
+//    Udp.endPacket();
+//    reply.empty();
+//
+//    reply.add(makeStatusAddr(camNum,"gamma")).add((int32_t)cameras[camNum].gamma[0]).add((float)cameras[camNum].gamma[1]).add((float)cameras[camNum].gamma[2]).add((float)cameras[camNum].gamma[3]);
+//    Udp.beginPacket(replyIp,replyPort);
+//    reply.send(Udp);
+//    Udp.endPacket();
+//    reply.empty();
+//
+//    reply.add(makeStatusAddr(camNum,"gain")).add((int32_t)cameras[camNum].gain[0]).add((float)cameras[camNum].gain[1]).add((float)cameras[camNum].gain[2]).add((float)cameras[camNum].gain[3]);
+//    Udp.beginPacket(replyIp,replyPort);
+//    reply.send(Udp);
+//    Udp.endPacket();
+//    reply.empty();
+//
+//    reply.add(makeStatusAddr(camNum,"whiteBalance")).add((int32_t)cameras[camNum].hue);
+//    Udp.beginPacket(replyIp,replyPort);
+//    reply.send(Udp);
+//    Udp.endPacket();
+//    reply.empty();
+//    
+//    reply.add(makeStatusAddr(camNum,"whiteBalance")).add((int32_t)cameras[camNum].saturation);
+//    Udp.beginPacket(replyIp,replyPort);
+//    reply.send(Udp);
+//    Udp.endPacket();
+//    reply.empty();
+//
+//}
 
 // ---- LOOP ---- //
 
@@ -266,8 +324,10 @@ void loop() {
 //     Serial.println("Packet Received...");
 
 
-    while(size--)
+    while(size--){
         bndl.fill(Udp.read());
+//        Serial.print(".");
+    }
 
         if(!bndl.hasError()){
 //           Serial.println("no err");
@@ -277,15 +337,18 @@ void loop() {
                 bndl.route("/bmc", parseBmcMsg);
 
                 bndl.route("/bmcRawVoid", writeRawVoid );
-                bndl.route("/getStatus", getStatus);
+         //       bndl.route("/getStatus", getStatus);
                 bndl.route("/setReplyPort", setReplyPort);
                 bndl.route("/setReplyIp", setReplyIp);
 
+                bndl.route("/bigMess", bigMess);
 
+//                Serial.println("routed.");
              }
         } else{
-         Serial.println("Error.");
+//         Serial.println("Error.");
         }
+//        Serial.print(".");
    }
   // --- //
 
@@ -423,7 +486,7 @@ char* makeStatusAddr(int _camNum, String _variable){
   addr+=_variable;
 
   addr.toCharArray(buffer, 256);
-  Serial.println(buffer);
+//  Serial.println(buffer);
 
   return buffer;
 
